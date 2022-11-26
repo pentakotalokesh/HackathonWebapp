@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="{% static 'Sign_up.css' %}">
+</head>
+<body>
+        {% for message in messages %}
+        <div class="warning">{{message}}</div>
+        {% endfor %}
+       <div class="Wrapper">
+        <div class="Box">
+            <img src="{% static 'images/logo2.jpeg' %}" class="avtar" alt="logo">
+            <form class="InBox" method="POST" action="">
+                {% csrf_token %}
+                <h1>Sign Up</h1>
+                <div class="input-box">
+                <p><span style="color: white;">Username:&nbsp;</span>{{form.username}}</p>
+                <br>
+                <p><span style="color: white;">Password:&nbsp;</span>{{form.password1}}</p>
+                <br>
+                <p><span style="color: white;">Re-Enter:&nbsp;</span>{{form.password2}}</p>
+                <br>
+                <button>Register</button>
+                </div>
+            </form>
+        </div>
+       </div>
+</body>
+</html>

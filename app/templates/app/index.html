@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Better india</title>
+</head>
+<body>
+    <section>
+        <div class="text">
+            <h2>Want To Make Better India !</h2>
+            <br>
+            <br>
+            <a href="{% url 'login' %}"><center><h3>Let's Post</h3></center></a>
+        </div>
+    </section>
+    <script>
+        function changebg(){
+            const images = [
+                'url("/static/images/intro.jpg")',
+                'url("/static/images/2.jpg")',
+                'url("/static/images/3.jpg")'
+            ]
+            const section = document.querySelector('section')
+            const bg = images[Math.floor(Math.random()*images.length)];
+            section.style.backgroundImage = bg;
+        }
+        setInterval(changebg,2000)
+    </script>
+</body>
+</html>
