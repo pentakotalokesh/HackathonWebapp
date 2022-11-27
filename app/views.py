@@ -10,11 +10,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import post,Like
 from . forms import postForm
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from .forms import CreateUser
 
 def index(request):
     return render(request,'app/index.html')
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -24,7 +26,7 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'app/Sign_up.html', {'form': form})
-
+@csrf_exempt
 def login_page(request):
     if request.user.is_authenticated and not request.user.is_superuser:
         return redirect('post')
@@ -46,6 +48,7 @@ def login_page(request):
         
 
     return render(request,'app/Login.html')
+@csrf_exempt
 def post_page(request):
     if request.user.is_authenticated:
         user = request.user
@@ -62,14 +65,14 @@ def post_page(request):
         return render(request,'app/postpage.html',context)
     else:
         return render(request,'app/Login.html')
-
+@csrf_exempt
 def Deletepost(request, pk):
     p = post.objects.get(id=pk)
     if request.method == 'POST':
         p.delete()
         return redirect('post')
     return render(request, 'app/delete.html', {'obj': p})
-
+@csrf_exempt
 def Updatepost(request, pk):
     p = post.objects.get(id=pk)
     form = postForm(instance=p)
@@ -81,7 +84,7 @@ def Updatepost(request, pk):
     context = {'form': form}
 
     return render(request, 'app/edit.html', context)
-
+@csrf_exempt
 def logout_page(request):
     logout(request)
     return redirect('login')
