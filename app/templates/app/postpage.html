@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'poststyle.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Welcome-Add Post</title>
+</head>
+<body>
+    <div class="main">
+        <div class="postpart">
+            <img id = "logo" src="{% static 'images/logo2.jpeg' %}">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form}}
+                <input id="bt" type="submit" value="POST">
+            </form>
+        </div>
+        {% for i in posts %}
+        <div class="postview">
+            <h4>@{{request.user.username}}</h4>
+            <img id="post" src="{{ i.post_img.url }}">
+            <a href="{% url 'DeletePerson' i.id %}"><i class="gg-user-remove"></i>remove</a>
+            <a href="{% url 'UpdatePerson' i.id %}"><i class="gg-edit-markup"></i>Edit</a>
+    </tr>
+         </div>
+         <div class="like">
+            <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
+            <h5>{{ i.likes }}</h5>
+         </div>
+         {% endfor %}
+    </div>
+</form>
+</body>
+</html>
